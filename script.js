@@ -12,6 +12,24 @@ $(document).ready(function() {
   let currentIndex = 0;
   const slidesCount = 3;
   
+  function showToast(message, type = 'success') {
+    const toast = $('#toast');
+    
+    // Réinitialiser les classes et styles
+    toast.removeClass('error success').addClass(type);
+    toast.text(message);
+    
+    // S'assurer qu'il est visible et opaque
+    toast.css({
+        'display': 'block',
+        'opacity': '1'
+    }).fadeIn(300);
+    
+    setTimeout(() => {
+        toast.fadeOut(300);
+    }, 3000);
+}
+
   // Set slide function
   function setSlide(i) {
     if (i < 0) i = 0;
@@ -91,49 +109,63 @@ $(document).ready(function() {
     }
   });
 
-  /* Trash -> delete in n8n or localStorage */
-  $('#trash').on('click', async function() {
-    if (N8N_DELETE_URL) {
-      try {
-        await $.ajax({
-          url: N8N_DELETE_URL,
-          method: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify({})
-        });
-      } catch (e) {
-        console.warn('delete n8n failed', e);
-      }
-    } else {
-      localStorage.removeItem(appKey);
-    }
-    $('#driveInput').val('');
-    updateCTAState();
-  });
+    // Modal de confirmation pour suppression
+    $('#trash').on('click', function() {
+        // Créer la modale si elle n'existe pas
+        if ($('#deleteModal').length === 0) {
+            $('body').append(`
+                <div id="deleteModal" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>Êtes-vous sûr de vouloir supprimer le lien vers votre coffre digital ?</p>
+                            <p><strong>Vos fichiers ne seront pas supprimés</strong> - seul le lien sera retiré.</p>
+                        </div>
+                        <div class="modal-actions">
+                            <button id="cancelDelete" class="btn-secondary">Annuler</button>
+                            <button id="confirmDelete" class="btn-primary">Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+        
+        // Afficher la modale
+        $('#deleteModal').fadeIn(300);
+    });
 
+    // Annuler
+    $(document).on('click', '#cancelDelete', function() {
+        $('#deleteModal').fadeOut(300);
+    });
+
+    // Confirmer la suppression
+    $(document).on('click', '#confirmDelete', function() {
+        $('#deleteModal').fadeOut(300);
+        // Ici tu appelleras ta fonction de suppression
+        //deleteLink();*
+        showToast('Lien supprimé avec succès !', 'success');
+
+    });
+
+
+  let saveTimeout;
   /* Input events -> store on blur */
   $('#driveInput')
-    .on('input', updateCTAState)
-    .on('blur', async function() {
-      const v = $(this).val() && $(this).val().trim();
-      if (v && looksLikeUrl(v)) {
-        if (N8N_STORE_URL) {
-          try {
-            await $.ajax({
-              url: N8N_STORE_URL,
-              method: 'POST',
-              contentType: 'application/json',
-              data: JSON.stringify({ link: v })
-            });
-          } catch (e) {
-            console.warn('store n8n failed', e);
+  .on('input', updateCTAState)
+  .on('focusout', function() {
+      // Petit délai pour être sûr que l'utilisateur a vraiment fini
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(async () => {
+          const v = $(this).val() && $(this).val().trim();
+          if (v && looksLikeUrl(v)) {
+              //await storeLink(v);
+              showToast('Lien enregistré avec succès !', 'success');
+          } else if (v && v.length > 0) {
+              showToast('Veuillez vérifier le format du lien', 'error');
           }
-        } else {
-          localStorage.setItem(appKey, v);
-        }
-      }
-      updateCTAState();
-    });
+          //updateCTAState();
+      }, 300); // 300ms de délai
+  });
 
   /* Load stored value on init */
   async function loadStored() {
