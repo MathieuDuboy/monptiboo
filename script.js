@@ -160,13 +160,13 @@ function setIconLoading() {
 function setIconSuccess() {
     const icon = $('#linkIcon');
     icon.removeClass('fa-spinner fa-link fa-xmark icon-loading icon-error')
-        .addClass('fa-check icon-success');
+        .addClass('fa-check').css('color', '#b49b92');;
 }
 
 function setIconError() {
     const icon = $('#linkIcon');
     icon.removeClass('fa-spinner fa-link fa-check icon-loading icon-success')
-        .addClass('fa-xmark icon-error');
+        .addClass('fa-xmark').css('color', '#b49b92');;
 }
 
 function setIconDefault() {
@@ -185,16 +185,27 @@ function setIconDefault() {
         };
     }
     $('#driveInput')
-    .on('input', updateCTAState)
-    .on('focusout', function(e) { // ← Ajouter 'paste' ici aussi
-        const delay = e.type === 'paste' ? 100 : 0;
-        setTimeout(() => {
+    .on('input', function() {
+        //;
+        // Afficher le bouton valider quand il y a du texte
+        const hasValue = $(this).val().trim().length > 0;
+        $('#validateBtn').toggle(hasValue);
+        $('#trash').toggle(false); // Cacher la poubelle
+    })
+    .on('keypress', function(e) {
+        // Valider avec la touche Entrée
+        if (e.which === 13) { // 13 = Enter
             handleInputSave.call(this);
-        }, delay);
+        }
     });
+
+// Validation manuelle
+$('#validateBtn').on('click', function() {
+    handleInputSave.call($('#driveInput'));
+});
     
 async function handleInputSave() {
-    const v = $(this).val().trim();
+    const v = $(this).val().trim();    $('#validateBtn').hide();
     if (v && looksLikeUrl(v)) {
         const linkValue = $('#driveInput').val().trim();
         const { uid, token } = getUrlParams(); 
@@ -224,6 +235,7 @@ async function handleInputSave() {
                 $('#driveInput').css('background-color', '#f8f9fa');
                 $('#driveInput').attr('placeholder', 'Lien enregistré avec succès !');
                 showToast('✓ Sauvegarde réussie !', 'success');
+                updateCTAState()
             } else {
                 // Erreur - icône rouge
                 setIconError();

@@ -70,19 +70,19 @@
       <div class="input-wrap" aria-label="Champ lien drive">
         <label class="label">Lien vers votre coffre digital</label>
         <div class="field" role="group" aria-label="Champ lien">
-          <div class="icon-left" aria-hidden="true" title="Lien">
-            <!-- link svg (childlike) -->
-            <i id="linkIcon" class="fa-solid fa-link" style="text-align:center;font-size:22px;color: #b49b92;"></i>
-
+            <div class="icon-left" aria-hidden="true" title="Lien">
+              <i id="linkIcon" class="fa-solid fa-link" style="text-align:center;font-size:22px;color: #b49b92;"></i>
+            </div>
+            <input id="driveInput" type="url" placeholder="Collez votre lien Drive ici (https://...)" autocomplete="off" />
+            
+            <button id="validateBtn" class="btn-validate" title="Valider le lien" aria-label="Valider le lien" style="display:none;">
+              <i class="fa-solid fa-check" style="text-align:center;font-size:22px;color: #22c55e;"></i>
+            </button>
+            
+            <button id="trash" class="btn-trash" title="Supprimer le lien" aria-label="Supprimer le lien" style="display:none;">
+              <i class="fa-solid fa-trash" style="text-align:center;font-size:22px;color: #b49b92;"></i>
+            </button>
           </div>
-
-          <input id="driveInput" type="url" placeholder="Collez votre lien Drive ici (https://...)" autocomplete="off" />
-
-          <button id="trash" class="btn-trash" title="Supprimer le lien" aria-label="Supprimer le lien" style="display:none;">
-            <!-- trash svg -->
-            <i class="fa-solid fa-trash" style="text-align:center;font-size:22px;color: #b49b92;"></i>
-          </button>
-        </div>
         <p class="muted-sm">Astuce : Google Drive est totalement gratuit !</p>
 
         <div class="clouds" role="list" aria-label="Services compatibles">
