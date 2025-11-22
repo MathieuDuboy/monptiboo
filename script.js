@@ -210,7 +210,7 @@ async function handleInputSave() {
         
         try {
             const response = await $.ajax({
-                url: 'https://n8n-u1vc.onrender.com/webhook-test/store',
+                url: 'https://n8n-u1vc.onrender.com/webhook/store',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
@@ -261,7 +261,7 @@ async function handleInputDelete() {
     
     try {
         const response = await $.ajax({
-            url: 'https://n8n-u1vc.onrender.com/webhook-test/delete',
+            url: 'https://n8n-u1vc.onrender.com/webhook/delete',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
