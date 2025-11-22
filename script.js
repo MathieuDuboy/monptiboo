@@ -141,12 +141,7 @@ $(document).ready(function() {
     // Confirmer la suppression
     $(document).on('click', '#confirmDelete', function() {
         $('#deleteModal').fadeOut(300);
-        
-        // Réinitialiser l'icône
-        setIconDefault();
-        enableInput();
-        
-        showToast('Lien supprimé avec succès !', 'success');
+        handleInputDelete()
     });
 
   let saveTimeout;
@@ -258,12 +253,59 @@ async function handleInputSave() {
     }
 }
 
-
+async function handleInputDelete() {
+    const { uid, token } = getUrlParams(); 
+    
+    // Afficher le loading sur l'icône de poubelle
+    $('#trash i').removeClass('fa-trash').addClass('fa-spinner fa-spin');
+    
+    try {
+        const response = await $.ajax({
+            url: 'https://n8n-u1vc.onrender.com/webhook-test/delete',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                uid: uid,
+                token: token
+            })
+        });
+        
+        const result = Array.isArray(response) ? response[0] : response;
+        console.log('Delete result:', result);
+        
+        // Réinitialiser l'interface
+        setIconDefault();
+        enableInput();
+        $('#driveInput').val('');
+        $('#validateBtn').hide();
+        $('#trash').hide();
+        updateCTAState();
+        
+        // Remettre l'icône poubelle normale
+        $('#trash i').removeClass('fa-spinner fa-spin').addClass('fa-trash');
+        
+        showToast('Lien supprimé avec succès !', 'success');
+        
+    } catch (error) {
+        console.error('Erreur suppression:', error);
+        
+        // Remettre l'icône poubelle normale en cas d'erreur
+        $('#trash i').removeClass('fa-spinner fa-spin').addClass('fa-trash');
+        
+        showToast('❌ Erreur lors de la suppression', 'error');
+    }
+}
  // Pour réactiver l'input si besoin
  function enableInput() {
-    $('#driveInput').prop('disabled', false);
-    $('#driveInput').css('background-color', 'white');
-    $('#driveInput').attr('placeholder', 'Collez votre lien Drive ici...');
+
+    $('#driveInput')
+        .prop('disabled', false)
+        .css({
+            'background-color': 'white',
+            'border-color': 'rgba(242,215,207,0.9)',
+            'opacity': '1'
+        })
+        .attr('placeholder', 'Collez votre lien Drive ici...');
 }
   /* Load stored value on init */
   async function loadStored() {
