@@ -67,7 +67,7 @@ $(document).ready(function() {
     const val = $('#driveInput').val() && $('#driveInput').val().trim().length > 5;
     if (val) {
       $('#ctaBtn').removeClass('disabled').attr('aria-disabled', 'false');
-      $('#trash').show();
+      $('.field').css('border', '2px solid #22c55e');      $('#trash').show();
     } else {
       $('#ctaBtn').addClass('disabled').attr('aria-disabled', 'true');
       $('#trash').hide();
