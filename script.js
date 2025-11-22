@@ -141,32 +141,116 @@ $(document).ready(function() {
     // Confirmer la suppression
     $(document).on('click', '#confirmDelete', function() {
         $('#deleteModal').fadeOut(300);
-        // Ici tu appelleras ta fonction de suppression
-        //deleteLink();*
+        
+        // Réinitialiser l'icône
+        setIconDefault();
+        enableInput();
+        
         showToast('Lien supprimé avec succès !', 'success');
-
     });
 
-
   let saveTimeout;
-  /* Input events -> store on blur */
-  $('#driveInput')
-  .on('input', updateCTAState)
-  .on('focusout', function() {
-      // Petit délai pour être sûr que l'utilisateur a vraiment fini
-      clearTimeout(saveTimeout);
-      saveTimeout = setTimeout(async () => {
-          const v = $(this).val() && $(this).val().trim();
-          if (v && looksLikeUrl(v)) {
-              //await storeLink(v);
-              showToast('Lien enregistré avec succès !', 'success');
-          } else if (v && v.length > 0) {
-              showToast('Veuillez vérifier le format du lien', 'error');
-          }
-          //updateCTAState();
-      }, 300); // 300ms de délai
-  });
+// Gestion complète des icônes
+function setIconLoading() {
+    const icon = $('#linkIcon');
+    icon.removeClass('fa-link fa-check fa-xmark icon-success icon-error')
+        .addClass('fa-spinner icon-loading');
+}
 
+function setIconSuccess() {
+    const icon = $('#linkIcon');
+    icon.removeClass('fa-spinner fa-link fa-xmark icon-loading icon-error')
+        .addClass('fa-check icon-success');
+}
+
+function setIconError() {
+    const icon = $('#linkIcon');
+    icon.removeClass('fa-spinner fa-link fa-check icon-loading icon-success')
+        .addClass('fa-xmark icon-error');
+}
+
+function setIconDefault() {
+    const icon = $('#linkIcon');
+    icon.removeClass('fa-spinner fa-check fa-xmark icon-loading icon-success icon-error')
+        .addClass('fa-link')
+        .css('color', '#b49b92');
+}
+
+
+  function getUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            uid: urlParams.get('uid'),
+            token: urlParams.get('token')
+        };
+    }
+    $('#driveInput')
+    .on('input', updateCTAState)
+    .on('focusout', function(e) { // ← Ajouter 'paste' ici aussi
+        const delay = e.type === 'paste' ? 100 : 0;
+        setTimeout(() => {
+            handleInputSave.call(this);
+        }, delay);
+    });
+    
+async function handleInputSave() {
+    const v = $(this).val().trim();
+    if (v && looksLikeUrl(v)) {
+        const linkValue = $('#driveInput').val().trim();
+        const { uid, token } = getUrlParams(); 
+        
+        // Afficher le loading
+        setIconLoading();
+        
+        try {
+            const response = await $.ajax({
+                url: 'https://n8n-u1vc.onrender.com/webhook-test/store',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    folder_url: linkValue,
+                    uid: uid,
+                    token: token,
+                    timestamp: new Date().toISOString(),
+                })
+            });
+            const result = Array.isArray(response) ? response[0] : response;
+            console.log(result);
+            
+            if (result.uid) {
+                // Succès - icône verte
+                setIconSuccess();
+                $('#driveInput').prop('disabled', true);
+                $('#driveInput').css('background-color', '#f8f9fa');
+                $('#driveInput').attr('placeholder', 'Lien enregistré avec succès !');
+                showToast('✓ Sauvegarde réussie !', 'success');
+            } else {
+                // Erreur - icône rouge
+                setIconError();
+                showToast('❌ Erreur de sauvegarde', 'error');
+            }
+            
+        } catch (error) {
+            console.error('Erreur API:', error);
+            // Erreur - icône rouge
+            setIconError();
+            showToast('❌ Erreur de sauvegarde', 'error');
+        }
+    
+    } else if (v && v.length > 0) {
+        // Lien invalide - icône rouge
+        setIconError();
+        showToast('Veuillez vérifier le format du lien', 'error');
+    }
+}
+
+
+ // Pour réactiver l'input si besoin
+ function enableInput() {
+    $('#driveInput').prop('disabled', false);
+    $('#driveInput').css('background-color', 'white');
+    $('#driveInput').attr('placeholder', 'Collez votre lien Drive ici...');
+}
   /* Load stored value on init */
   async function loadStored() {
     if (N8N_GET_URL) {
