@@ -145,12 +145,17 @@
   }
   .field .hint{font-size:13px;color:var(--muted);}
   
-  .btn-trash{
+  .btn-trash {
+    width:38px;height:38px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 6px 16px rgba(74,59,54,0.06);
+  }
+  .btn-validate{
     width:38px;height:38px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;
     box-shadow:0 6px 16px rgba(74,59,54,0.06);
   }
   .btn-trash svg{opacity:0.9}
-  
+  .btn-validate svg{opacity:0.9}
+
   .muted-sm{font-size:11px;color:var(--muted);text-align:center;}
   
   /* Clouds/services compact */

@@ -159,14 +159,14 @@ function setIconLoading() {
 
 function setIconSuccess() {
     const icon = $('#linkIcon');
-    icon.removeClass('fa-spinner fa-link fa-xmark icon-loading icon-error')
-        .addClass('fa-check').css('color', '#b49b92');;
+    icon.removeClass('fa-spinner fa-xmark icon-loading icon-error')
+    .addClass('fa-link icon-success');
 }
 
 function setIconError() {
     const icon = $('#linkIcon');
-    icon.removeClass('fa-spinner fa-link fa-check icon-loading icon-success')
-        .addClass('fa-xmark').css('color', '#b49b92');;
+    icon.removeClass('fa-spinner fa-check icon-loading icon-success')
+    .addClass('fa-link icon-error');
 }
 
 function setIconDefault() {
@@ -205,7 +205,7 @@ $('#validateBtn').on('click', function() {
 });
     
 async function handleInputSave() {
-    const v = $(this).val().trim();    $('#validateBtn').hide();
+    const v = $(this).val().trim();    
     if (v && looksLikeUrl(v)) {
         const linkValue = $('#driveInput').val().trim();
         const { uid, token } = getUrlParams(); 
@@ -231,6 +231,8 @@ async function handleInputSave() {
             if (result.uid) {
                 // Succès - icône verte
                 setIconSuccess();
+                $('#validateBtn').hide();
+
                 $('#driveInput').prop('disabled', true);
                 $('#driveInput').css('background-color', '#f8f9fa');
                 $('#driveInput').attr('placeholder', 'Lien enregistré avec succès !');
