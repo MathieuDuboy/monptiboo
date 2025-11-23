@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>F.A.Q - MonPtiBoo</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    .faq-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .faq-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      border: 1px solid rgba(74,59,54,0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 18px 20px;
+      background: var(--card-strong);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: white;
+    }
+    .faq-answer.active {
+      padding: 20px;
+      max-height: 500px;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+      color: var(--accent);
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .highlight {
+      background: linear-gradient(180deg, rgba(245,192,170,0.24), rgba(241,183,159,0.18));
+      padding: 16px;
+      border-radius: var(--radius);
+      margin: 20px 0;
+      border-left: 4px solid var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="app" role="application">
+    <div class="header">
+      <div class="logo-wrap">
+        <img src="img/logo.png" width="28px" alt="MonPtiBoo">
+      </div>
+      <h1>Foire Aux Questions</h1>
+      <p class="baseline">Trouvez les réponses à vos questions</p>
+    </div>
+
+    <div class="main">
+      <div class="faq-container">
+        <a href="index.html" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+          Retour à l'accueil
+        </a>
+
+        <div class="highlight">
+          <p><strong>💡 Besoin d'aide supplémentaire ?</strong></p>
+          <p>Contactez-nous à : <span class="variable">[EMAIL_SUPPORT]</span></p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Qu'est-ce que MonPtiBoo ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>MonPtiBoo est un service simple qui vous permet de créer un accès rapide et sécurisé vers le coffre digital de votre enfant. Nous ne stockons pas vos fichiers, nous créons simplement un raccourci vers votre espace de stockage cloud existant.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Quels services cloud sont compatibles ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>MonPtiBoo fonctionne avec tous les principaux services de stockage cloud :</p>
+            <ul>
+              <li>Google Drive</li>
+              <li>Dropbox</li>
+              <li>OneDrive (Microsoft)</li>
+              <li>iCloud</li>
+              <li>Et bien d'autres !</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Mes fichiers sont-ils en sécurité ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p><strong>Absolument !</strong> Vos fichiers restent stockés sur votre service cloud habituel. MonPtiBoo ne fait que créer un lien de redirection. Nous n'avons aucun accès à vos fichiers et ne les stockons pas sur nos serveurs.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Comment créer un lien de partage sécurisé ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Sur votre service cloud :</p>
+            <ol>
+              <li>Créez un dossier dédié aux créations de votre enfant</li>
+              <li>Cliquez sur "Partager" ou "Partage"</li>
+              <li>Générez un lien de partage</li>
+              <li>Assurez-vous que le lien est accessible aux personnes possédant le lien</li>
+              <li>Copiez ce lien dans MonPtiBoo</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Que se passe-t-il si je supprime le lien dans MonPtiBoo ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>La suppression dans MonPtiBoo ne supprime <strong>PAS</strong> vos fichiers ! Elle retire seulement le raccourci depuis notre application. Vos fichiers restent intacts dans votre cloud et vous pouvez toujours y accéder directement.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Le service est-il vraiment gratuit ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Oui, MonPtiBoo est entièrement gratuit. Nous croyons que chaque parent devrait pouvoir conserver précieusement les créations de son enfant sans frais supplémentaires.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Puis-je utiliser plusieurs liens différents ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Actuellement, MonPtiBoo gère un lien principal par utilisateur. Vous pouvez le modifier à tout moment en supprimant l'ancien et en ajoutant le nouveau.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Comment contacter le support ?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Vous pouvez nous contacter à :</p>
+            <p>Email : <span class="variable">[EMAIL_SUPPORT]</span></p>
+            <p>Nous répondons sous <span class="variable">[DELAI_REPONSE]</span> heures ouvrées.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="links">
+        <a href="index.html">Accueil</a> • 
+        <a href="mentions.html">Mentions légales</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('.faq-question').on('click', function() {
+        const $faqItem = $(this).closest('.faq-item');
+        const $answer = $faqItem.find('.faq-answer');
+        
+        $faqItem.toggleClass('active');
+        $answer.toggleClass('active');
+        
+        // Fermer les autres FAQ
+        $('.faq-item').not($faqItem).removeClass('active');
+        $('.faq-answer').not($answer).removeClass('active');
+      });
+    });
+  </script>
+</body>
+</html>

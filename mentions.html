@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mentions Légales - MonPtiBoo</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    .legal-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .legal-section {
+      margin-bottom: 30px;
+    }
+    .legal-section h2 {
+      color: var(--text);
+      font-size: 18px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 8px;
+    }
+    .legal-section p {
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .variable {
+      background: var(--card-strong);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px dashed var(--muted);
+      color: var(--text);
+    }
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="app" role="application">
+    <div class="header">
+      <div class="logo-wrap">
+        <img src="img/logo.png" width="28px" alt="MonPtiBoo">
+      </div>
+      <h1>Mentions Légales</h1>
+      <p class="baseline">Informations légales de MonPtiBoo</p>
+    </div>
+
+    <div class="main">
+      <div class="legal-container">
+        <a href="index.html" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+          Retour à l'accueil
+        </a>
+
+        <div class="legal-section">
+          <h2>Éditeur du site</h2>
+          <p><strong>MonPtiBoo</strong></p>
+          <p>Société : <span class="variable">[TYPE_ENTREPRISE]</span> au capital de <span class="variable">[CAPITAL]</span> €</p>
+          <p>Siège social : <span class="variable">[ADRESSE_SIEGE]</span></p>
+          <p>SIRET : <span class="variable">[NUMERO_SIRET]</span></p>
+          <p>RCS : <span class="variable">[VILLE_RCS]</span></p>
+        </div>
+
+        <div class="legal-section">
+          <h2>Directeur de la publication</h2>
+          <p>Nom : <span class="variable">[NOM_DIRECTEUR]</span></p>
+          <p>Email : <span class="variable">[EMAIL_CONTACT]</span></p>
+          <p>Téléphone : <span class="variable">[TELEPHONE_CONTACT]</span></p>
+        </div>
+
+        <div class="legal-section">
+          <h2>Hébergement</h2>
+          <p>Le site MonPtiBoo est hébergé par :</p>
+          <p><span class="variable">[NOM_HEBERGEUR]</span></p>
+          <p>Adresse : <span class="variable">[ADRESSE_HEBERGEUR]</span></p>
+          <p>Téléphone : <span class="variable">[TELEPHONE_HEBERGEUR]</span></p>
+        </div>
+
+        <div class="legal-section">
+          <h2>Protection des données personnelles</h2>
+          <p>MonPtiBoo s'engage à protéger la vie privée de ses utilisateurs.</p>
+          <p>Délégué à la protection des données : <span class="variable">[NOM_DPO]</span></p>
+          <p>Email DPO : <span class="variable">[EMAIL_DPO]</span></p>
+          <p>Conformité : RGPD - CNIL <span class="variable">[NUMERO_CNIL]</span></p>
+        </div>
+
+        <div class="legal-section">
+          <h2>Propriété intellectuelle</h2>
+          <p>L'ensemble des éléments constituant le site MonPtiBoo (textes, images, logos, etc.) est la propriété exclusive de <span class="variable">[NOM_ENTREPRISE]</span>.</p>
+          <p>Toute reproduction sans autorisation est interdite.</p>
+        </div>
+
+        <div class="legal-section">
+          <h2>Cookies</h2>
+          <p>MonPtiBoo utilise des cookies techniques nécessaires au fonctionnement de l'application.</p>
+          <p>Nous n'utilisons pas de cookies de tracking ou de publicité.</p>
+        </div>
+
+        <div class="legal-section">
+          <h2>Limitation de responsabilité</h2>
+          <p>MonPtiBoo est un service de redirection vers vos espaces de stockage cloud.</p>
+          <p>Nous ne stockons pas vos fichiers et ne sommes pas responsables du contenu de vos dossiers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="links">
+        <a href="index.html">Accueil</a> • 
+        <a href="faq.html">F.A.Q</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
