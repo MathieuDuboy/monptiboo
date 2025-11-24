@@ -213,7 +213,9 @@ function handleSaveSuccess() {
         .prop('disabled', true)
         .css('background-color', '#f8f9fa')
         .attr('placeholder', 'Lien enregistré avec succès !');
-    
+        
+    $('.muted-sm').html('<b>Rappel : MonPtiBoo ne fait que créer un lien de redirection.</b> Nous n\'avons aucun accès à vos fichiers et ne les stockons pas sur nos serveurs.')
+
     showToast('✓ Sauvegarde réussie !', 'success');
     updateCTAState();
 }
@@ -287,7 +289,7 @@ async function handleInputDelete() {
         
         resetInterfaceAfterDelete();
         showToast('Lien supprimé avec succès !', 'success');
-        
+        $('.muted-sm').html('<b>Astuce : Google Drive est totalement gratuit !</b><br />Creéz votre lien via les services ci-dessous')
     } catch (error) {
         console.error('Erreur suppression:', error);
         handleDeleteError();
@@ -460,6 +462,7 @@ async function loadStoredValue() {
                     $('#validateBtn').hide();
                     $('#driveInput').prop('disabled', true);
                     $('#driveInput').css('background-color', '#f8f9fa');
+                    $('.muted-sm').html('<b>Rappel : MonPtiBoo ne fait que créer un lien de redirection.</b> Nous n\'avons aucun accès à vos fichiers et ne les stockons pas sur nos serveurs.')
                 }else{
                      // y'a rien
                 setIconDefault()

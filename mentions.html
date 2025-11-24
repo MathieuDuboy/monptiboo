@@ -50,7 +50,10 @@
       border-radius: var(--radius);
       margin-bottom: 20px;
       font-weight: 600;
-    }
+    }   .main {
+  overflow-y: auto;
+  max-height: calc(100vh - 140px); /* Ajustez selon la hauteur de votre header/footer */
+}
   </style>
 </head>
 <body>
@@ -73,38 +76,35 @@
         <div class="legal-section">
           <h2>Éditeur du site</h2>
           <p><strong>MonPtiBoo</strong></p>
-          <p>Société : <span class="variable">[TYPE_ENTREPRISE]</span> au capital de <span class="variable">[CAPITAL]</span> €</p>
-          <p>Siège social : <span class="variable">[ADRESSE_SIEGE]</span></p>
-          <p>SIRET : <span class="variable">[NUMERO_SIRET]</span></p>
-          <p>RCS : <span class="variable">[VILLE_RCS]</span></p>
+          <p>Société : <span class="variable">Atelier Mayalet</span></p>
+          <p>Siège social : <span class="variable">64 impasse de la Biballe, 40460 Sanguinet</span></p>
+          <p>SIRET : <span class="variable">90874208300011</span></p>
+          <p>RCS : <span class="variable">RCD de Mont de Marsan</span></p>
         </div>
 
         <div class="legal-section">
           <h2>Directeur de la publication</h2>
-          <p>Nom : <span class="variable">[NOM_DIRECTEUR]</span></p>
-          <p>Email : <span class="variable">[EMAIL_CONTACT]</span></p>
-          <p>Téléphone : <span class="variable">[TELEPHONE_CONTACT]</span></p>
+          <p>Nom : <span class="variable">Atelier Mayalet</span></p>
+          <p>Email : <span class="variable">atelier.mayalet@gmail.com</span></p>
         </div>
 
         <div class="legal-section">
           <h2>Hébergement</h2>
           <p>Le site MonPtiBoo est hébergé par :</p>
-          <p><span class="variable">[NOM_HEBERGEUR]</span></p>
-          <p>Adresse : <span class="variable">[ADRESSE_HEBERGEUR]</span></p>
-          <p>Téléphone : <span class="variable">[TELEPHONE_HEBERGEUR]</span></p>
+          <p><span class="variable">Hostinger</span></p>
+          <p>Adresse : <span class="variable">61 Lordou Vironos Street, 6023 Larnaca, Chypre</span></p>
         </div>
 
         <div class="legal-section">
           <h2>Protection des données personnelles</h2>
           <p>MonPtiBoo s'engage à protéger la vie privée de ses utilisateurs.</p>
-          <p>Délégué à la protection des données : <span class="variable">[NOM_DPO]</span></p>
-          <p>Email DPO : <span class="variable">[EMAIL_DPO]</span></p>
-          <p>Conformité : RGPD - CNIL <span class="variable">[NUMERO_CNIL]</span></p>
+          <p>Délégué à la protection des données : <span class="variable">Yamina VIALES</span></p>
+          <p>Email DPO : <span class="variable">atelier.mayalet@gmail.com</span></p>
         </div>
 
         <div class="legal-section">
           <h2>Propriété intellectuelle</h2>
-          <p>L'ensemble des éléments constituant le site MonPtiBoo (textes, images, logos, etc.) est la propriété exclusive de <span class="variable">[NOM_ENTREPRISE]</span>.</p>
+          <p>L'ensemble des éléments constituant le site MonPtiBoo (textes, images, logos, etc.) est la propriété exclusive de <span class="variable">L'atelier Mayalet</span>.</p>
           <p>Toute reproduction sans autorisation est interdite.</p>
         </div>
 
@@ -122,12 +122,6 @@
       </div>
     </div>
 
-    <div class="footer">
-      <div class="links">
-        <a href="index.html">Accueil</a> • 
-        <a href="faq.html">F.A.Q</a>
-      </div>
-    </div>
   </div>
 </body>
 </html>
